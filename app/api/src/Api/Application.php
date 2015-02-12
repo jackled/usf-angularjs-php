@@ -24,7 +24,22 @@ class Application extends Slim
         }
         return $config;
     }
+	
+	protected function tokenAuth() {
+		//Get app environment variables
+		$this->environment['auth.config.cas'] = array ('environment' => 'development');
+		$this->environment['auth.config.token'] = array (
+			'app_id' => 'https://dev.it.usf.edu/~jack/ExampleApp',
+            'app_key' => 'secretKey',
+            'token_url' => 'https://authtest.it.usf.edu/AuthTransferService/webtoken/');
 
+		//Authenticate requests to /api/* with CAS and permit all users
+		$this->environment['auth.interceptUrlMap'] = array('GET' => array( '/**' => array('authN' => 'token', 'authZ' => 'permitAll')));
+		
+		//Add the Auth Middleware
+		$this->add(new SlimAuthMiddleware());
+	}
+	
     public function __construct(array $userSettings = array(), $configDirectory = 'config')
     {
         // Slim initialization
@@ -41,22 +56,8 @@ class Application extends Slim
         $this->configDirectory = __DIR__ . '/../../' . $configDirectory;
         $this->config = $this->initConfig();
 
-		//Get app environment variables
-		$this->environment['auth.config.cas'] = array ('environment' => 'development');
-		$this->environment['auth.config.token'] = array ('app_id' => 'https://dev.it.usf.edu/~jack/ExampleApp',
-                                   'app_key' => 'secretKey',
-                                   'token_url' => 'https://authtest.it.usf.edu/AuthTransferService/webtoken');
-
-
-		//Authenticate requests to /api/* with CAS and permit all users
-		$this->environment['auth.interceptUrlMap'] = array('GET' => array( '/features' => array('authN' => 'token',
-																			'authZ' => 'permitAll')
-														   )
-											 );
-		//Add the Auth Middleware
-		$this->add(new SlimAuthMiddleware());
+		$this->tokenAuth();
 		
-
         // /features
         $this->get('/features', function () {
             $features = new Features($this->config['features']);

@@ -21,8 +21,8 @@ angular.module('usfTemplateApp')
     $scope.awesomeThings = [];
     $scope.loading = true;
 
-    // Get awesome things list
-    $http({method: 'GET', headers: { 'X-Auth-Token': tokenAuth.getStoredToken('AppResourceOne')}, url: tokenAuth.getResourceUrl('AppResourceOne')}).
+	// Get awesome things list
+    $http({method: 'GET', appKey: 'AppResourceOne'}).
 
       success(function (data) {
         $scope.loading = false;
@@ -32,7 +32,9 @@ angular.module('usfTemplateApp')
         $scope.awesomeThings.forEach(function (thing) {
           thing.loading = true;
 
-          $http({method: 'GET', url: thing.href, ignoreAuthModule: true}).
+          //$http({method: 'GET', url: thing.href, ignoreAuthModule: true}).
+		  $http({method: 'GET', appKey: 'AppResourceOne', url: thing.href}).
+
             success(function (data) {
               thing.loading = false;
               thing.description = data.description;

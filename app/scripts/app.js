@@ -21,7 +21,7 @@ angular
   .constant('UsfCAStokenAuthConstant', {
 		'applicationUniqueId': 'f6765e988eb32cbda5dcd9ee2673c0a8',
 		'applicationResources': {
-			AppResourceOne: 'http://localhost:9000/api/features'
+			AppResourceOne: '/api/features'
 		},
 		'unauthorizedRoute': '/unauthorized'
   })

@@ -32,7 +32,7 @@ angular.module('usfTemplateApp')
         $scope.awesomeThings.forEach(function (thing) {
           thing.loading = true;
 
-          $http({method: 'GET', url: thing.href}).
+          $http({method: 'GET', appKey: 'AppResourceOne', url: thing.href}).
             success(function (data) {
               thing.loading = false;
               thing.description = data.description;
