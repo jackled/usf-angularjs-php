@@ -22,8 +22,6 @@ class Application extends Slim
 		// Slim initialization
         parent::__construct($userSettings);
 		
-		$this->config('debug', true);
-        
 		$this->notFound(function () {
             $this->handleNotFound();
         });
@@ -33,29 +31,17 @@ class Application extends Slim
 
         // Load config files
         $this->configDirectory = __DIR__ . '/../../' . $configDirectory;
-		$this->config = new UsfConfig('/tmp/config');
+		$this->config = new UsfConfig($this->configDirectory);
         
+		// Security
+		$this->environment['auth.config.cas'] = $this->config->casConfig;
+		$this->environment['auth.config.token'] = $this->config->tokenConfig;
+		$this->environment['auth.interceptUrlMap'] = $this->config->urlMapConfig;
+		
 		// Logging
 		$this->environment['log.config'] = $this->config->logConfig;
 
-
-		
-		//Get app environment variables
-		$this->environment['auth.config.cas'] = array ('environment' => 'development');
-		$this->environment['auth.config.token'] = array (
-			'app_id' => 'https://dev.it.usf.edu/~jack/ExampleApp',
-            'app_key' => 'secretKey',
-            'token_url' => 'https://authtest.it.usf.edu/AuthTransferService/webtoken/');
-
-		//Authenticate requests to /api/* with CAS and permit all users
-		$this->environment['auth.interceptUrlMap'] = array(
-				'GET' => array( '/**' => array('authN' => 'token', 'authZ' => 'permitAll')),
-				'PUT' => array( '/**' => array('authN' => 'token', 'authZ' => 'permitAll')),
-				'POST' => array( '/**' => array('authN' => 'token', 'authZ' => 'permitAll')),
-				'DELETE' => array( '/**' => array('authN' => 'token', 'authZ' => 'permitAll'))
-			);
-		
-		//Add the Auth Middleware
+		// Add the Middleware
 		$this->add(new SlimAuthMiddleware());
 		$this->add(new SlimLogMiddleware());
 

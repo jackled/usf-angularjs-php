@@ -1,0 +1,25 @@
+# SlimAuthMiddleware configuration
+casConfig:
+- environment: development
+
+tokenConfig:
+- app_id: https://dev.it.usf.edu/~jack/ExampleApp
+  token_url: https://authtest.it.usf.edu/AuthTransferService/webtoken/
+# Authenticate requests to /api/* with CAS and permit all users
+urlMapConfig:
+- GET:
+  - /**:
+    - authN: token
+      authZ: permitAll
+- PUT:
+  - /**:
+    - authN: token
+      authZ: permitAll
+- POST:
+  - /**:
+    - authN: token
+      authZ: permitAll
+- DELETE:
+  - /**:
+    - authN: token
+      authZ: permitAll
