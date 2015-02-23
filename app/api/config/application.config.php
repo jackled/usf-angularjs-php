@@ -1,5 +1,5 @@
 <?php
-return array(
+$config = array(
     'features' => array(
         'get' => array(
             'name' => 'Get',
