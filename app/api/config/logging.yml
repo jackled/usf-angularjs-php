@@ -1,0 +1,16 @@
+#logging config
+logConfig:
+-
+    name: log
+    type: file
+	default: true
+	config:
+        log_location: /tmp/application.log
+        log_level: info
+-
+    name: audit
+    type: file
+	default: false
+	config:
+        log_location: /tmp/audit.log
+        log_level: info

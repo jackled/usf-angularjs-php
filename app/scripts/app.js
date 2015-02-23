@@ -8,7 +8,7 @@
  *
  * Main module of the application.
  */
-angular
+var usfTemplateApp = angular
   .module('usfTemplateApp', [
     'ngAnimate',
     'ngCookies',
@@ -18,27 +18,36 @@ angular
     'ngTouch',
 	'UsfCAStokenAuth'
   ])
-  .constant('UsfCAStokenAuthConstant', {
-		'applicationUniqueId': 'f6765e988eb32cbda5dcd9ee2673c0a8',
-		'applicationResources': {
-			AppResourceOne: '/api/features'
-		},
-		'unauthorizedRoute': '/unauthorized'
-  })
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
+      .when('/get', {
+        templateUrl: 'views/service.html',
+        controller: 'GetCtrl'
       })
-	  .when('/contact', {
-        templateUrl: 'views/contact.html',
-        controller: 'ContactCtrl'
+	  .when('/put', {
+        templateUrl: 'views/service.html',
+        controller: 'PutCtrl'
       })
+	  .when('/post', {
+        templateUrl: 'views/service.html',
+        controller: 'PostCtrl'
+      })
+	  .when('/delete', {
+        templateUrl: 'views/service.html',
+        controller: 'DeleteCtrl'
+      })
+	  .when('/login', {
+		templateUrl: 'views/main.html',
+		controller: 'LoginCtrl'
+	  })
+	  .when('/exit', {
+		templateUrl: 'views/exit.html',
+		controller: 'ExitCtrl'
+	  })
 	  .when('/unauthorized', {
         templateUrl: 'views/unauthorized.html',
         controller: 'MainCtrl'

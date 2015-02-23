@@ -16,15 +16,17 @@ class Features
         $this->features = $features;
     }
 
-    public function getFeatures()
+    public function getFeatures($label)
     {
         $features = array();
         foreach ($this->features as $id => $feature) {
-            $features[] = array(
-                'id' => $id,
-                'name' => $feature['name'],
-                'href' => $this->getHref($id),
-            );
+			if ($label == $id) {
+				$features[] = array(
+					'id' => $id,
+					'name' => $feature['name'],
+					'href' => $this->getHref($id),
+				);
+			}
         }
         return $features;
     }

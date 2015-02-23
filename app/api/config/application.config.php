@@ -1,19 +1,21 @@
 <?php
 return array(
     'features' => array(
-        'html5-boilerplate' => array(
-            'name' => 'HTML5 Boilerplate',
-            'description' => 'HTML5 Boilerplate is a professional front-end template'
-                . ' for building fast, robust, and adaptable web apps or sites.',
+        'get' => array(
+            'name' => 'Get',
+            'description' => 'Get method is used to read collections or individual elements.',
         ),
-        'angular' => array(
-            'name' => 'Angular',
-            'description' => 'AngularJS is a toolset for building the framework most'
-                . ' suited to your application development.',
+        'put' => array(
+            'name' => 'Put',
+            'description' => 'Put method is used to update an element.',
         ),
-        'karma' => array(
-            'name' => 'Karma',
-            'description' => 'Spectacular Test Runner for JavaScript.',
+        'post' => array(
+            'name' => 'Post',
+            'description' => 'Post method is used to create a new element.  It can also be used to update existing elements for sensitive data.',
         ),
-    ),
+		'delete' => array(
+            'name' => 'Delete',
+            'description' => 'Delete method is used to delete an element.',
+        ),
+    )
 );

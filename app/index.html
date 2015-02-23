@@ -19,23 +19,56 @@
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
-    <!-- Add your site or application content here -->
+	
+	<!-- Add your application navigation and content here -->
     <div class="container">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a ng-href="#/">Home</a></li>
-          <li><a ng-href="#/about">About</a></li>
-          <li><a ng-href="#/contact">Contact</a></li>
-        </ul>
-        <h3 class="text-muted">usfTemplate</h3>
-      </div>
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="container-fluid">
+			  <!-- Brand and toggle get grouped for better mobile display -->
+			  <div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				  <span class="sr-only">Toggle navigation</span>
+				  <span class="icon-bar"></span>
+				  <span class="icon-bar"></span>
+				  <span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#/">usf-angularjs-php</a>
+			  </div>
+			  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li><a ng-href="#/get">Get</a></li>
+					<li><a ng-href="#/put">Put</a></li>
+					<li><a ng-href="#/post">Post</a></li>
+					<li><a ng-href="#/delete">Delete</a></li>
+				</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<div>
+								<div class="check-element animate-hide navbar-text" ng-show="isTokenSet()">
+								  {{name}} ({{role}})
+								</div>
+							</div>
+						</li>
+						<li ng-show="isTokenSet()">
+							<form action="#/exit">
+								<button class="navbar-btn btn-primary btn-sm">Logout <span class="glyphicon glyphicon-log-out"></span></button>
+							</form>
+						</li>
+						<li ng-show="!isTokenSet()">
+							<form action="#/login">
+								<button class="navbar-btn btn-primary btn-sm">Login <span class="glyphicon glyphicon-log-in"></span></button>
+							</form>
+						</li>
+					</ul>
+			  </div><!-- /.navbar-collapse -->
+			</div><!-- /.container-fluid -->
+		</nav>
+	
+		<div ng-view=""></div>
 
-      <div ng-view=""></div>
-
-      <div class="footer">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
-      </div>
+		<div class="footer">
+		  <p><span class="glyphicon glyphicon-heart"></span> from the USF IT team</p>
+		</div>
     </div>
 
     <!--[if lt IE 9]>
@@ -63,8 +96,14 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
-		<script src="scripts/controllers/contact.js"></script>
+        <script src="scripts/controllers/get.js"></script>
+		<script src="scripts/controllers/put.js"></script>
+		<script src="scripts/controllers/post.js"></script>
+		<script src="scripts/controllers/delete.js"></script>
+		<script src="scripts/controllers/login.js"></script>
+		<script src="scripts/controllers/exit.js"></script>
         <!-- endbuild -->
+	
+	<script src="config.js"></script>
 </body>
 </html>

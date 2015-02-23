@@ -4,11 +4,11 @@
  * @ngdoc function
  * @name usfTemplateApp.controller:AboutCtrl
  * @description
- * # AboutCtrl
+ * # GetCtrl
  * Controller of the usfTemplateApp
  */
 angular.module('usfTemplateApp')
-  .controller('ContactCtrl', function ($scope, $http) {
+  .controller('GetCtrl', ['$scope', '$http', 'tokenAuth', function ($scope, $http, tokenAuth) {
 
     function createUnknownError(status) {
       return {
@@ -21,8 +21,8 @@ angular.module('usfTemplateApp')
     $scope.awesomeThings = [];
     $scope.loading = true;
 
-    // Get awesome things list
-    $http({method: 'GET', url: '/api/features'}).
+	// Get awesome things list
+    $http({method: 'GET', appKey: 'AppResourceOne'}).
 
       success(function (data) {
         $scope.loading = false;
@@ -32,7 +32,9 @@ angular.module('usfTemplateApp')
         $scope.awesomeThings.forEach(function (thing) {
           thing.loading = true;
 
-          $http({method: 'GET', appKey: 'AppResourceOne', url: thing.href}).
+          //$http({method: 'GET', url: thing.href, ignoreAuthModule: true}).
+		  $http({method: 'GET', appKey: 'AppResourceOne', url: thing.href}).
+
             success(function (data) {
               thing.loading = false;
               thing.description = data.description;
@@ -48,4 +50,4 @@ angular.module('usfTemplateApp')
         $scope.loading = false;
         $scope.error = data && data.description ? data : createUnknownError(status);
       });
-  });
+  }]);

@@ -8,8 +8,12 @@
  * Controller of the usfTemplateApp
  */
 angular.module('usfTemplateApp')
-  .controller('MainCtrl', function ($scope, $http) {
+  .controller('MainCtrl', ['$scope', '$rootScope', 'tokenAuth', function ($scope, $rootScope, tokenAuth) {
 
+	$rootScope.isTokenSet = function() { // used to control login/logout button display
+		return tokenAuth.hasToken('AppResourceOne');
+	}
+	
     function createUnknownError(status) {
       return {
         status: status,
@@ -20,4 +24,4 @@ angular.module('usfTemplateApp')
 
     $scope.awesomeThings = [];
     $scope.loading = true;
-  });
+  }]);
