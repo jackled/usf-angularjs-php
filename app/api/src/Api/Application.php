@@ -31,19 +31,14 @@ class Application extends Slim
             $this->handleException($e);
         });
 
-        // Config
+        // Load config files
         $this->configDirectory = __DIR__ . '/../../' . $configDirectory;
-		print_r($this->configDirectory);
-		
-		$this->config = new UsfConfig($this->configDirectory);
-		
+		$this->config = new UsfConfig('/tmp/config');
+        
 		// Logging
-		
-		
 		$this->environment['log.config'] = $this->config->logConfig;
-foreach ($this->config as $item => $value) {
-  echo "<li>{$item} is {$value}</li>";
-}
+
+
 		
 		//Get app environment variables
 		$this->environment['auth.config.cas'] = array ('environment' => 'development');
@@ -62,7 +57,7 @@ foreach ($this->config as $item => $value) {
 		
 		//Add the Auth Middleware
 		$this->add(new SlimAuthMiddleware());
-		//$this->add(new SlimLogMiddleware());
+		$this->add(new SlimLogMiddleware());
 
 		// identity
         $this->get('/identity', function () {
