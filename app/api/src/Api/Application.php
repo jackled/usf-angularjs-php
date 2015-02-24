@@ -32,7 +32,7 @@ class Application extends Slim
         // Load config files
         $this->configDirectory = __DIR__ . '/../../' . $configDirectory;
 		$this->config = new UsfConfig($this->configDirectory);
-        
+      
 		// Security
 		$this->environment['auth.config.cas'] = $this->config->casConfig;
 		$this->environment['auth.config.token'] = $this->config->tokenConfig;
@@ -53,20 +53,19 @@ class Application extends Slim
 			} else {
 				$role = 'User';
 			}
-            $this->response->headers->set('Content-Type', 'application/json');
-            $this->response->setBody(json_encode(array('name' => $name,'role' => $role)));
+			$this->log->info('Identity: '.$name.' - '.$role);
+			$this->response->headers->set('Content-Type', 'application/json');
+            $this->response->setBody(json_encode(array('name' => $name, 'role' => $role)));
         });
 		
         // /features
         $this->get('/features', function () {
-			$this->log->warn('Logging A...');
-            $features = new Features($this->config['features']);
+			$features = new Features($this->config['features']);
             $this->response->headers->set('Content-Type', 'application/json');
             $this->response->setBody(json_encode($features->getFeatures('get')));
         });
 		
 		$this->get('/features/:id', function ($id) {
-			$this->log->warn('Logging B...');
             $features = new Features($this->config['features']);
             $feature = $features->getFeature($id);
             if ($feature === null) {

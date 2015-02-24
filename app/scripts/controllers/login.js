@@ -10,13 +10,11 @@
 angular.module('usfTemplateApp')
   .controller('LoginCtrl', ['$scope', '$rootScope', '$http', 'tokenAuth', function ($scope, $rootScope, $http, tokenAuth) {
 
-	// Get Identity
-    $http({method: 'GET', appKey: 'AppResourceIdentity'}).
+	// This should never be called unless token is missing, which means that
+	// following call will return a 401 and /api/identity will be called again from main so no need to do anything here...
+    $http({method: 'GET', appKey: 'AppResourceOne', url: '/api/identity'}).
     success(function (data) {
-		$rootScope.name = data.name;
-		$rootScope.role = data.role;
         $scope.loading = false;
-		console.log($rootScope.name + ' ' + $rootScope.role);
     }).
 	error(function (data, status) {
         $scope.loading = false;
