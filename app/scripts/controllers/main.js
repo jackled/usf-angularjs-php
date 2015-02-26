@@ -12,7 +12,7 @@ angular.module('usfTemplateApp')
 
 	// if token is present then extract user name and role
 	if (tokenAuth.hasToken('AppResourceOne')) {
-		$http({method: 'GET', appKey: 'AppResourceOne', url: '/api/identity'}).
+		$http({method: 'GET', appKey: 'AppResourceOne', url: 'api/identity'}).
 		success(function (data) {
 			$rootScope.name = data.name;
 			$rootScope.role = data.role;

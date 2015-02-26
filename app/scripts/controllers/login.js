@@ -12,7 +12,7 @@ angular.module('usfTemplateApp')
 
 	// This should never be called unless token is missing, which means that
 	// following call will return a 401 and /api/identity will be called again from main so no need to do anything here...
-    $http({method: 'GET', appKey: 'AppResourceOne', url: '/api/identity'}).
+    $http({method: 'GET', appKey: 'AppResourceOne', url: 'api/identity'}).
     success(function (data) {
         $scope.loading = false;
     }).
