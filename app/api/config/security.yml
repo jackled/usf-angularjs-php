@@ -1,4 +1,6 @@
 # SlimAuthMiddleware configuration
+entitlement: itVipUser
+
 casConfig:
   environment: development
 

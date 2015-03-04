@@ -9,6 +9,7 @@ use \Exception;
 use \USF\IdM\UsfConfig;
 use \USF\auth\SlimAuthMiddleware;
 use \USF\IdM\SlimLogMiddleware;
+use \USF\IdM\UsfVipDatabase;
 
 
 // TODO Move all "features" things to a class with index() and get() methods
@@ -48,7 +49,7 @@ class Application extends Slim
 		// identity
         $this->get('/identity', function () {
 			$name = $this->environment['principal.attributes']['GivenName'].' '.$this->environment['principal.attributes']['Surname'];
-			if (in_array('itVipUser', $this->environment['principal.entitlements'])) {
+			if (in_array($this->config->entitlement, $this->environment['principal.entitlements'])) {
 				$role = 'Admin';
 			} else {
 				$role = 'User';
@@ -60,6 +61,8 @@ class Application extends Slim
 		
         // /features
         $this->get('/features', function () {
+			$db = new UsfVipDatabase();
+			
 			$features = new Features($this->config['features']);
             $this->response->headers->set('Content-Type', 'application/json');
             $this->response->setBody(json_encode($features->getFeatures('get')));
