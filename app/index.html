@@ -42,19 +42,15 @@
 					<li><a ng-href="#/delete">Delete</a></li>
 				</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li>
-							<div>
-								<div class="check-element animate-hide navbar-text" ng-show="isTokenSet()">
-								  {{name}} ({{role}})
-								</div>
-							</div>
+						<li ng-show="isAuthenticated()">
+							<div class="check-element animate-hide navbar-text">{{name}} ({{role}})</div>
 						</li>
-						<li ng-show="isTokenSet()">
+						<li ng-show="isAuthenticated()">
 							<form action="#/exit">
 								<button class="navbar-btn btn-primary btn-sm">Logout <span class="glyphicon glyphicon-log-out"></span></button>
 							</form>
 						</li>
-						<li ng-show="!isTokenSet()">
+						<li ng-show="!isAuthenticated()">
 							<form action="#/login">
 								<button class="navbar-btn btn-primary btn-sm">Login <span class="glyphicon glyphicon-log-in"></span></button>
 							</form>

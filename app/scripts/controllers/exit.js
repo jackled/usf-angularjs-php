@@ -9,6 +9,5 @@
  */
 angular.module('usfTemplateApp')
   .controller('ExitCtrl', function ($scope, $rootScope, tokenAuth) {
-	console.log('ExitCtrl');
-	tokenAuth.clearTokens();
+	tokenAuth.clearSessionCookie();
 });
