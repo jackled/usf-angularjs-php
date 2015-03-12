@@ -1,12 +1,4 @@
 'use strict';
-
-/**
- * @ngdoc function
- * @name usfTemplateApp.controller:AboutCtrl
- * @description
- * # DeleteCtrl
- * Controller of the usfTemplateApp
- */
 angular.module('usfTemplateApp')
   .controller('DeleteCtrl', function ($scope, $http) {
 
@@ -22,7 +14,7 @@ angular.module('usfTemplateApp')
     $scope.loading = true;
 
     // Get awesome things list
-    $http({method: 'DELETE', appKey: 'AppResourceOne'}).
+    $http({method: 'DELETE', tokenKey: 'AppResourceOne'}).
 
       success(function (data) {
         $scope.loading = false;
@@ -32,7 +24,7 @@ angular.module('usfTemplateApp')
         $scope.awesomeThings.forEach(function (thing) {
           thing.loading = true;
 
-          $http({method: 'DELETE', appKey: 'AppResourceOne', url: thing.href}).
+          $http({method: 'DELETE', tokenKey: 'AppResourceOne', url: thing.href}).
             success(function (data) {
               thing.loading = false;
               thing.description = data.description;

@@ -15,8 +15,7 @@ class FeaturesTest extends \PHPUnit_Framework_TestCase
         $features = new Features($allFeatures);
         $this->assertEquals(array(
             array('id' => 'f1', 'name' => 'feature 1', 'href' => './api/features/f1'),
-            array('id' => 'f2', 'name' => 'feature 2', 'href' => './api/features/f2'),
-        ), $features->getFeatures());
+        ), $features->getFeatures('f1'));
     }
 
     public function testGetFeatureReturnsExpectedFeature()

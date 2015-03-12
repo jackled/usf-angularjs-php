@@ -1,22 +1,10 @@
 'use strict';
-
-/**
- * @ngdoc function
- * @name usfTemplateApp.controller:MainCtrl
- * @description
- * # MainCtrl
- * Controller of the usfTemplateApp
- */
 angular.module('usfTemplateApp')
-  .controller('MainCtrl', ['$scope', '$rootScope', '$http', 'tokenAuth', function ($scope, $rootScope, $http, tokenAuth) {
-
-	$rootScope.isAuthenticated = function() { // used to control login/logout button display
-		return tokenAuth.isLoggedIn();
-	}  
+  .controller('MainCtrl', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
 
 	// if user is logged in then extract their name and role
-	if ($rootScope.isAuthenticated()) {
-		$http({method: 'GET', appKey: 'AppResourceOne', url: 'api/identity'}).
+	if ($rootScope.isTokenAuth()) {
+		$http({method: 'GET', tokenKey: 'AppResourceOne', url: 'api/identity'}).
 			success(function (data) {
 				$rootScope.name = data.name;
 				$rootScope.role = data.role;

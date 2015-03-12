@@ -13,7 +13,7 @@ $config = array(
             'name' => 'Post',
             'description' => 'Post method is used to create a new element.  It can also be used to update existing elements for sensitive data.',
         ),
-		'delete' => array(
+        'delete' => array(
             'name' => 'Delete',
             'description' => 'Delete method is used to delete an element.',
         ),

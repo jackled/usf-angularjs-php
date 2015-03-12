@@ -1,14 +1,6 @@
 'use strict';
-
-/**
- * @ngdoc function
- * @name usfTemplateApp.controller:AboutCtrl
- * @description
- * # GetCtrl
- * Controller of the usfTemplateApp
- */
 angular.module('usfTemplateApp')
-  .controller('GetCtrl', ['$scope', '$http', 'tokenAuth', function ($scope, $http, tokenAuth) {
+  .controller('GetCtrl', ['$scope', '$http', function ($scope, $http) {
 
     function createUnknownError(status) {
       return {
@@ -22,7 +14,7 @@ angular.module('usfTemplateApp')
     $scope.loading = true;
 
 	// Get awesome things list
-    $http({method: 'GET', appKey: 'AppResourceOne'}).
+    $http({method: 'GET', tokenKey: 'AppResourceOne'}).
 
       success(function (data) {
         $scope.loading = false;
@@ -33,7 +25,7 @@ angular.module('usfTemplateApp')
           thing.loading = true;
 
           //$http({method: 'GET', url: thing.href, ignoreAuthModule: true}).
-		  $http({method: 'GET', appKey: 'AppResourceOne', url: thing.href}).
+		  $http({method: 'GET', tokenKey: 'AppResourceOne', url: thing.href}).
 
             success(function (data) {
               thing.loading = false;

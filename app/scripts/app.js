@@ -1,15 +1,5 @@
 'use strict';
-
-/**
- * @ngdoc overview
- * @name usfTemplateApp
- * @description
- * # usfTemplateApp
- *
- * Main module of the application.
- */
-var usfTemplateApp = angular
-  .module('usfTemplateApp', [
+angular.module('usfTemplateApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
@@ -41,12 +31,12 @@ var usfTemplateApp = angular
         controller: 'DeleteCtrl'
       })
 	  .when('/login', {
-		templateUrl: 'views/main.html',
+		templateUrl: 'views/login.html',
 		controller: 'LoginCtrl'
 	  })
-	  .when('/exit', {
-		templateUrl: 'views/exit.html',
-		controller: 'ExitCtrl'
+	  .when('/logout', {
+		templateUrl: 'views/logout.html',
+		controller: 'LogoutCtrl'
 	  })
 	  .when('/unauthorized', {
         templateUrl: 'views/unauthorized.html',
