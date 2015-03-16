@@ -12,7 +12,7 @@ tokenConfig:
 urlMapConfig:
   GET:
     /**:
-      authN: token
+      authN: permitAll
       authZ: permitAll
   PUT:
     /**:

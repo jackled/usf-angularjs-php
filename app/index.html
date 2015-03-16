@@ -37,9 +37,9 @@
 			  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a ng-href="#/get">Get</a></li>
-					<li><a ng-href="#/put">Put</a></li>
-					<li><a ng-href="#/post">Post</a></li>
-					<li><a ng-href="#/delete">Delete</a></li>
+					<li ng-show="isTokenAuth()"><a ng-href="#/put">Put</a></li>
+					<li ng-show="isTokenAuth()"><a ng-href="#/post">Post</a></li>
+					<li ng-show="isTokenAuth()"><a ng-href="#/delete">Delete</a></li>
 				</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li ng-show="isTokenAuth()">

@@ -3,7 +3,7 @@ $config = array(
     'features' => array(
         'get' => array(
             'name' => 'Get',
-            'description' => 'Get method is used to read collections or individual elements.',
+            'description' => 'Get method is used to read collections or individual elements.  NOTE: In this example GET service call is not access restricted.',
         ),
         'put' => array(
             'name' => 'Put',

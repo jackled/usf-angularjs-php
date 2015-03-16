@@ -47,7 +47,7 @@ class Application extends Slim
 		$this->add(new SlimLogMiddleware());
 
 		// identity
-        $this->get('/identity', function () {
+        $this->put('/identity', function () {
 			$name = $this->environment['principal.attributes']['GivenName'].' '.$this->environment['principal.attributes']['Surname'];
 			if (in_array($this->config->entitlement, $this->environment['principal.entitlements'])) {
 				$role = 'Admin';

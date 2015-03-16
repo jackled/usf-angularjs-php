@@ -31,7 +31,7 @@ angular.module('usfTemplateApp', [
         controller: 'DeleteCtrl'
       })
 	  .when('/login', {
-		templateUrl: 'views/login.html',
+		templateUrl: 'views/main.html',
 		controller: 'LoginCtrl'
 	  })
 	  .when('/logout', {
