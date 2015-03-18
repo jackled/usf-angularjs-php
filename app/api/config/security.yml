@@ -8,6 +8,10 @@ tokenConfig:
   app_id: https://dev.it.usf.edu/~jack/ExampleApp
   token_url: https://authtest.it.usf.edu/AuthTransferService/webtoken/
 
+hashConfig:
+  algo: hash256
+  secret: ABCDEF123456
+
 # Authenticate requests to /api/* with CAS and permit all users
 urlMapConfig:
   GET:

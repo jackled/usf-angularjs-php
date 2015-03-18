@@ -3,7 +3,9 @@ $config = array(
     'features' => array(
         'get' => array(
             'name' => 'Get',
-            'description' => 'Get method is used to read collections or individual elements.  NOTE: In this example GET service call is not access restricted.',
+            'description' => 'Get method is used to read collections or individual elements.  '
+			. 'NOTE: In this example GET service call is not access restricted and '
+			. 'returns a number of rows in vip.identity database table.',
         ),
         'put' => array(
             'name' => 'Put',

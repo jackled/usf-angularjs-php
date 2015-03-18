@@ -61,11 +61,15 @@ class Application extends Slim
 		
         // /features
         $this->get('/features', function () {
-			$db = new UsfVipDatabase();
-			
 			$features = new Features($this->config['features']);
             $this->response->headers->set('Content-Type', 'application/json');
-            $this->response->setBody(json_encode($features->getFeatures('get')));
+            
+			// get number of rows from vip.identity table and append it to name
+			$db = new UsfVipDatabase();
+			$vipcount = $db->identityCount();
+			$payload = $features->getFeatures('get');
+			$payload[0]['name'] = $payload[0]['name']." - vip.identity row count: ".$vipcount;
+			$this->response->setBody(json_encode($payload));
         });
 		
 		$this->get('/features/:id', function ($id) {
