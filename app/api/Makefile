@@ -34,7 +34,6 @@ update: composer.phar composer.json Makefile
 # ==============================================================================
 
 test: install
-	make lint && \
 	vendor/bin/phpunit --coverage-html build/logs/coverage --coverage-text=build/logs/coverage.txt && \
 	echo && \
 	echo ======== Code coverage ======== && \

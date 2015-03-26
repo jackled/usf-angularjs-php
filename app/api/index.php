@@ -1,4 +1,5 @@
 <?php
+
 error_reporting(-1);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -14,15 +15,14 @@ try {
     // Initialize Slim Framework
     if (!class_exists('\\Slim\\Slim')) {
         throw new \Exception(
-            'Missing Slim from Composer dependencies.'
-            . ' Ensure slim/slim is in composer.json and run `make update --directory app/api`'
+        'Missing Slim from Composer dependencies.'
+        . ' Ensure slim/slim is in composer.json and run `make update --directory app/api`'
         );
     }
 
     // Run application
     $app = new \Api\Application();
     $app->run();
-
 } catch (\Exception $e) {
     if (isset($app)) {
         $app->handleException($e);
