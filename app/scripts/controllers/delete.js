@@ -1,6 +1,5 @@
 'use strict';
-angular.module('usfTemplateApp')
-    .controller('DeleteCtrl', function ($scope, $http) {
+app.controller('DeleteCtrl', function ($scope, $http) {
         function createUnknownError(status) {
             return {
                 status: status,

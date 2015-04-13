@@ -24,8 +24,9 @@ module.exports = function (config) {
             'bower_components/angular-sanitize/angular-sanitize.js',
             'bower_components/angular-touch/angular-touch.js',
             'bower_components/usfcastokenauth/usfcastokenauth.js',      
-            'bower_components/angularLocalStorage/src/angularLocalStorage.js',      
+            'bower_components/angularLocalStorage/src/angularLocalStorage.js',
             'app/scripts/**/*.js',
+            'app/*.js',
             'tests/**/*.js'
         ],
         // list of files / patterns to exclude
