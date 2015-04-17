@@ -9,31 +9,21 @@
    * Factory in the usfTemplateApp.
    */
     angular.module('usfTemplateApp')
-        .factory('DeleteService',['$resource','tokenAuth', function ($resource,tokenAuth) {
+        .factory('DeleteService',['$resource','$http','tokenAuth', function ($resource,$http,tokenAuth) {
             // Public API here
             var service = {
                 defaultDeleteMethod: function() {
                     return deleteResource.defaultDeleteMethod({}).$promise;
                 },
                 customDeleteMethod: function(url) {
-                    this.setDeleteUrl(url);
-                    return deleteResource.customDeleteMethod({}).$promise;
-                },
-                setDeleteUrl: function(url) {
-                    this.deleteUrl = url;
-                },
-                getDeleteUrl: function() {
-                    return this.deleteUrl;
+                    return $http({method: 'DELETE', tokenKey: 'AppResourceOne', url: url});                
                 }
             };
             // Service logic
             var deleteResource = $resource(tokenAuth.getResourceUrl('AppResourceOne'),{},{
                 'defaultDeleteMethod': {
-                    method: 'DELETE', tokenKey: 'AppResourceOne'
-                },
-                'customDeleteMethod': {
-                    method: 'DELETE', tokenKey: 'AppResourceOne', url: service.getDeleteUrl()
-                }                
+                    method: 'DELETE', tokenKey: 'AppResourceOne', isArray:true
+                }
             });
       
             return service;
