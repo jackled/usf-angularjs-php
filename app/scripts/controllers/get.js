@@ -1,5 +1,7 @@
-'use strict';
-app.controller('GetCtrl', ['$scope', '$http', function ($scope, $http) {
+(function (window, angular, undefined) {
+    'use strict';
+    angular.module('usfTemplateApp')
+    .controller('GetCtrl', ['$scope', '$http', function ($scope, $http) {
     function createUnknownError(status) {
         return {
             status: status,
@@ -38,3 +40,4 @@ app.controller('GetCtrl', ['$scope', '$http', function ($scope, $http) {
             $scope.error = data && data.description ? data : createUnknownError(status);
         });
 }]);
+})(window, window.angular);

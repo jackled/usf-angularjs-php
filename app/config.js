@@ -1,5 +1,7 @@
-'use strict';
-app.constant('UsfCAStokenAuthConstant', {
+(function (window, angular, undefined) {
+    'use strict';
+    angular.module('usfTemplateApp')
+    .constant('UsfCAStokenAuthConstant', {
         'debug': false,
         'applicationUniqueId': 'f6765e988eb32cbda5dcd9ee2673c0a8',
         'applicationResources': {
@@ -9,4 +11,4 @@ app.constant('UsfCAStokenAuthConstant', {
         'logoutRoute': '/logout',
         'unauthorizedRoute': '/unauthorized'
     });
-	
+})(window, window.angular);

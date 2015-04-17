@@ -1,5 +1,7 @@
-'use strict';
-app.controller('DeleteCtrl', function ($scope, $http) {
+(function (window, angular, undefined) {
+    'use strict';
+    angular.module('usfTemplateApp')
+    .controller('DeleteCtrl', ['$scope', 'DeleteService', function ($scope, DeleteService) {
         function createUnknownError(status) {
             return {
                 status: status,
@@ -12,28 +14,38 @@ app.controller('DeleteCtrl', function ($scope, $http) {
         $scope.loading = true;
 
         // Get awesome things list
-        $http({method: 'DELETE', tokenKey: 'AppResourceOne'})
-            .success(function (data) {
+        DeleteService.defaultDeleteMethod()
+            .then(function(data){
                 $scope.loading = false;
                 $scope.awesomeThings = data;
 
                 // Get description of each thing
                 $scope.awesomeThings.forEach(function (thing) {
                     thing.loading = true;
-
-                    $http({method: 'DELETE', tokenKey: 'AppResourceOne', url: thing.href})
-                        .success(function (data) {
+                    
+                    DeleteService.customDeleteMethod(thing.href)
+                        .then(function(data) {
                             thing.loading = false;
                             thing.description = data.description;
-                        })
-                        .error(function (data, status) {
-                            thing.loading = false;
-                            thing.error = data && data.description ? data : createUnknownError(status);
-                        });
+                        },
+                        function(response) {
+                            var data = response.data,
+                                // header = response.header,
+                                // config = response.config,
+                                status = response.status;
+                            $scope.loading = false;
+                            $scope.error = data.data && data.description ? data : createUnknownError(status);
+                    });
                 });
-            })
-            .error(function (data, status) {
+            },
+            function(response) {
+                var data = response.data,
+                    // header = response.header,
+                    // config = response.config,
+                    status = response.status;
                 $scope.loading = false;
-                $scope.error = data && data.description ? data : createUnknownError(status);
-            });
-    });
+                $scope.error = data.data && data.description ? data : createUnknownError(status);
+        });
+
+    }]);
+})(window, window.angular);
