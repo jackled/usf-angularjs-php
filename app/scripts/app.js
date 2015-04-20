@@ -1,13 +1,14 @@
-'use strict';
-var app = angular.module('usfTemplateApp', [
+(function (window, angular, undefined) {
+    'use strict';
+    angular.module('usfTemplateApp', [
     'ngAnimate',
-    'ngCookies',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngTouch',
-    'UsfCAStokenAuth'
-])
+        'ngCookies',
+        'ngResource',
+        'ngRoute',
+        'ngSanitize',
+        'ngTouch',
+        'UsfCAStokenAuth'
+    ])
     .config(function ($routeProvider) {
         $routeProvider
             .when('/', {
@@ -46,3 +47,4 @@ var app = angular.module('usfTemplateApp', [
                 redirectTo: '/'
             });
     });
+})(window, window.angular);

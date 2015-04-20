@@ -12,8 +12,9 @@ describe('LogoutCtrl', function () {
     }));
 
     describe('clears the rootScope', function () {
-        it('it does', function () {
-            expect(true).toEqual(true);
+        it('has correct initial values', function() {
+            expect(scope.name).toBe('');
+            expect(scope.role).toBe('');  
         });
     });
 });
