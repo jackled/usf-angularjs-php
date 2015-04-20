@@ -26,7 +26,6 @@
                     thing.loading = true;
                     promises.push(DeleteService.customDeleteMethod(thing.href));
                 });
-              
                 $q.all(promises).then(function(data){
                     $scope.awesomeThings[count].loading = false;
                     $scope.awesomeThings[count] = data.description;
