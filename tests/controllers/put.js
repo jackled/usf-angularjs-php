@@ -18,7 +18,7 @@ describe('Controller: PutCtrl', function () {
                         defaultPutMethod: function() {
                             var defer = $q.defer(),
                                 data = [
-                                    { url: 'api/test1' }
+                                    { href: 'api/test1' }
                                 ];                            
                             defer.resolve(data);
                             
@@ -26,7 +26,7 @@ describe('Controller: PutCtrl', function () {
                         },
                         customPutMethod: function(href) {
                             var defer = $q.defer();
-                            defer.resolve((href === 'api/test1')?{ description: 'test is good '}:{});
+                            defer.resolve((href === 'api/test1')?{ data: { description: 'test is good' } }:{});
                             return defer.promise;
                         }
                     };
