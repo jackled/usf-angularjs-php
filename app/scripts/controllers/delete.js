@@ -26,17 +26,25 @@
                     thing.loading = true;
                     promises.push(DeleteService.customDeleteMethod(thing.href));
                 });
-                $q.all(promises).then(function(data){
-                    $scope.awesomeThings[count].loading = false;
-                    $scope.awesomeThings[count] = data.description;
-                    count++;                
-                },function(response) {
-                    var data = response.data,
-                        // header = response.header,
-                        // config = response.config,
-                        status = response.status;
-                    $scope.loading = false;
-                    $scope.error = data.data && data.description ? data : createUnknownError(status);
+                $q.all(promises).then(function(responses){
+                    responses.forEach(function (response) {
+                        var data = response.data;
+                            // header = response.header,
+                            // config = response.config,
+                            // status = response.status;
+                        $scope.awesomeThings[count].loading = false;
+                        $scope.awesomeThings[count].description = data.description;
+                        count++;                
+                    });
+                },function(responses) {
+                    responses.forEach(function (response) {
+                        var data = response.data,
+                            // header = response.header,
+                            // config = response.config,
+                            status = response.status;
+                        $scope.loading = false;
+                        $scope.error = data && data.description ? data : createUnknownError(status);
+                    });
                 });
             },
             function(response) {
