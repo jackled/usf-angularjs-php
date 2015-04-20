@@ -1,21 +1,21 @@
 'use strict';
 
-describe('Controller: DeleteCtrl', function () {
+describe('Controller: PostCtrl', function () {
 
     // load the controller's module
     beforeEach(module('usfTemplateApp'));
 
-    var DeleteCtrl,
-        DeleteService,
+    var PostCtrl,
+        PostService,
         scope;
         
     beforeEach(function() {
         module(function($provide){
-            $provide.factory('DeleteService', function() {
+            $provide.factory('PostService', function() {
                 var service;
                 inject(function($q) {
                     service = {                        
-                        defaultDeleteMethod: function() {
+                        defaultPostMethod: function() {
                             var defer = $q.defer(),
                                 data = [
                                     { url: 'api/test1' }
@@ -24,7 +24,7 @@ describe('Controller: DeleteCtrl', function () {
                             
                             return defer.promise;
                         },
-                        customDeleteMethod: function(href) {
+                        customPostMethod: function(href) {
                             var defer = $q.defer();
                             defer.resolve((href === 'api/test1')?{ description: 'test is good '}:{});
                             return defer.promise;
@@ -37,13 +37,13 @@ describe('Controller: DeleteCtrl', function () {
     });            
     
     // Initialize the controller and a mock scope
-    beforeEach(inject(function ($controller, $rootScope, $q, _DeleteService_) {
+    beforeEach(inject(function ($controller, $rootScope, $q, _PostService_) {
         scope = $rootScope.$new();
-        DeleteService = _DeleteService_;
-        DeleteCtrl = $controller('DeleteCtrl', {
+        PostService = _PostService_;
+        PostCtrl = $controller('PostCtrl', {
             $scope: scope,
             $q: $q,
-            DeleteService: DeleteService
+            PostService: PostService
         });
         scope.$digest();
     }));

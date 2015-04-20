@@ -1,7 +1,7 @@
 (function (window, angular, undefined) {
     'use strict';
     angular.module('usfTemplateApp')
-    .controller('PutCtrl', function ($scope, $http) {
+    .controller('PutCtrl', function ($scope, $http, $q, PutService) {
         function createUnknownError(status) {
             return {
                 status: status,
@@ -14,29 +14,39 @@
         $scope.loading = true;
     
         // Get awesome things list
-        $http({method: 'PUT', tokenKey: 'AppResourceOne'})
-            .success(function (data) {
+        PutService.defaultPutMethod()
+            .then(function(data){
                 $scope.loading = false;
                 $scope.awesomeThings = data;
-    
+                                
                 // Get description of each thing
+                var promises = [],
+                    count = 0;
                 $scope.awesomeThings.forEach(function (thing) {
                     thing.loading = true;
-    
-                    $http({method: 'PUT', tokenKey: 'AppResourceOne', url: thing.href})
-                        .success(function (data) {
-                            thing.loading = false;
-                            thing.description = data.description;
-                        })
-                        .error(function (data, status) {
-                            thing.loading = false;
-                            thing.error = data && data.description ? data : createUnknownError(status);
-                        });
+                    promises.push(PutService.customPutMethod(thing.href));
                 });
-            })
-            .error(function (data, status) {
+              
+                $q.all(promises).then(function(data){
+                    $scope.awesomeThings[count].loading = false;
+                    $scope.awesomeThings[count] = data.description;
+                    count++;                
+                },function(response) {
+                    var data = response.data,
+                        // header = response.header,
+                        // config = response.config,
+                        status = response.status;
+                    $scope.loading = false;
+                    $scope.error = data.data && data.description ? data : createUnknownError(status);
+                });
+            },
+            function(response) {
+                var data = response.data,
+                    // header = response.header,
+                    // config = response.config,
+                    status = response.status;
                 $scope.loading = false;
-                $scope.error = data && data.description ? data : createUnknownError(status);
-            });
+                $scope.error = data.data && data.description ? data : createUnknownError(status);
+        });                
     });
 })(window, window.angular);

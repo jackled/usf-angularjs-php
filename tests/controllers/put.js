@@ -1,21 +1,21 @@
 'use strict';
 
-describe('Controller: DeleteCtrl', function () {
+describe('Controller: PutCtrl', function () {
 
     // load the controller's module
     beforeEach(module('usfTemplateApp'));
 
-    var DeleteCtrl,
-        DeleteService,
+    var PutCtrl,
+        PutService,
         scope;
         
     beforeEach(function() {
         module(function($provide){
-            $provide.factory('DeleteService', function() {
+            $provide.factory('PutService', function() {
                 var service;
                 inject(function($q) {
                     service = {                        
-                        defaultDeleteMethod: function() {
+                        defaultPutMethod: function() {
                             var defer = $q.defer(),
                                 data = [
                                     { url: 'api/test1' }
@@ -24,7 +24,7 @@ describe('Controller: DeleteCtrl', function () {
                             
                             return defer.promise;
                         },
-                        customDeleteMethod: function(href) {
+                        customPutMethod: function(href) {
                             var defer = $q.defer();
                             defer.resolve((href === 'api/test1')?{ description: 'test is good '}:{});
                             return defer.promise;
@@ -37,13 +37,13 @@ describe('Controller: DeleteCtrl', function () {
     });            
     
     // Initialize the controller and a mock scope
-    beforeEach(inject(function ($controller, $rootScope, $q, _DeleteService_) {
+    beforeEach(inject(function ($controller, $rootScope, $q, _PutService_) {
         scope = $rootScope.$new();
-        DeleteService = _DeleteService_;
-        DeleteCtrl = $controller('DeleteCtrl', {
+        PutService = _PutService_;
+        PutCtrl = $controller('PutCtrl', {
             $scope: scope,
             $q: $q,
-            DeleteService: DeleteService
+            PutService: PutService
         });
         scope.$digest();
     }));

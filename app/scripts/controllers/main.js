@@ -1,7 +1,7 @@
 (function (window, angular, undefined) {
     'use strict';
     angular.module('usfTemplateApp')
-    .controller('MainCtrl', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
+    .controller('MainCtrl', ['$scope', '$rootScope', 'PutService', function ($scope, $rootScope, PutService) {
         function createUnknownError(status) {
             return {
                 status: status,
@@ -11,16 +11,20 @@
         }
         // if user is logged in then extract their name and role
         if ($rootScope.isTokenAuth()) {
-            $http({method: 'PUT', tokenKey: 'AppResourceOne', url: 'api/identity'})
-                .success(function (data) {
+            PutService.loginTriggerMethod()
+                .then(function(data){
                     $rootScope.name = data.name;
                     $rootScope.role = data.role;
                     $scope.loading = false;
-                })
-                .error(function (data, status) {
+                },
+                function(response) {
+                    var data = response.data,
+                        // header = response.header,
+                        // config = response.config,
+                        status = response.status;
                     $scope.loading = false;
-                    $scope.error = data && data.description ? data : createUnknownError(status);
-                });
+                    $scope.error = data.data && data.description ? data : createUnknownError(status);
+            });
         }
     
         $scope.awesomeThings = [];

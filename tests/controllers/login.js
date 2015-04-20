@@ -6,13 +6,13 @@ describe('Controller: LoginCtrl', function () {
 
     var scope,
         LoginCtrl,
-        LoginService,
+        PutService,
         $location;
     
     // Mock the LoginService
     beforeEach(function() {
         module(function($provide){
-            $provide.factory('LoginService', function() {
+            $provide.factory('PutService', function() {
                 var service;
                 inject(function($q) {
                     service = {                        
@@ -35,17 +35,17 @@ describe('Controller: LoginCtrl', function () {
 
             
     // Initialize the controller and a mock scope
-    beforeEach(inject(function($rootScope, $controller, _$location_, _LoginService_) {
+    beforeEach(inject(function($rootScope, $controller, _$location_, _PutService_) {
         //create an empty scope
         scope = $rootScope.$new();
         $location = _$location_;
-        LoginService = _LoginService_;
+        PutService = _PutService_;
         //declare the controller and inject our empty scope
         LoginCtrl = $controller('LoginCtrl', {
             $scope: scope,
             $rootScope: scope,
             $location: $location,
-            LoginService: LoginService
+            PutService: PutService
         });
                 
         scope.$digest();                

@@ -1,7 +1,7 @@
 (function (window, angular, undefined) {
     'use strict';
     angular.module('usfTemplateApp')
-    .controller('LoginCtrl', ['$scope', '$rootScope', '$location', 'LoginService', function ($scope, $rootScope, $location, LoginService) {
+    .controller('LoginCtrl', ['$scope', '$rootScope', '$location', 'PutService', function ($scope, $rootScope, $location, PutService) {
         function createUnknownError(status) {
             return {
                 status: status,
@@ -11,7 +11,7 @@
         }
         // This should never be called unless token is missing, which means that
         // following call will return a 401 and /api/identity will be called again in the main controller.
-        LoginService.loginTriggerMethod()
+        PutService.loginTriggerMethod()
             .then(function(data){
                 $rootScope.name = data.name;
                 $rootScope.role = data.role;
